@@ -10,11 +10,17 @@
 
 <body>
 
+<!-- SPLASH -->
 <div id="splash">
   <img id="logo" src="./assets/icon.svg" alt="Firemap">
 </div>
 
-<main id="page" class="hidden"></main>
+<!-- PÁGINA -->
+<main id="page" class="hidden">
+  <header class="topbar">
+    <div class="top-title">Firemap</div>
+  </header>
+</main>
 
 <script>
 window.addEventListener("load", () => {
@@ -23,13 +29,13 @@ window.addEventListener("load", () => {
   const logo = document.getElementById("logo");
   const page = document.getElementById("page");
 
-  // Forzamos que primero pinte invisible
+  // Logo aparece lento
   setTimeout(() => {
     logo.classList.add("logo-in");
-  }, 200); // espera 200ms antes de empezar a aparecer
+  }, 200);
 
-  const HOLD_MS = 1800; // tiempo total visible antes de desaparecer
-  const FADE_MS = 1200; // duración del fade out
+  const HOLD_MS = 1800; // espera antes de irse
+  const FADE_MS = 1200; // duración fade out
 
   setTimeout(() => {
     splash.classList.add("fade");

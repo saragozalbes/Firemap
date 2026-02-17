@@ -4,6 +4,7 @@ html,body{
   height:100%;
   background:white;
   font-family:system-ui;
+  color:#111;
 }
 
 /* SPLASH */
@@ -12,33 +13,26 @@ html,body{
   position:fixed;
   inset:0;
   background:white;
-
   display:flex;
   align-items:center;
   justify-content:center;
-
   transition:opacity 1.2s ease;
   z-index:9999;
 }
 
-/* Logo empieza totalmente invisible */
 #logo{
   width:140px;
   height:auto;
-
   opacity:0;
   transform:scale(0.92);
-
   transition: opacity 2.2s ease, transform 2.2s ease;
 }
 
-/* Aparece MUY suave */
 #logo.logo-in{
   opacity:1;
   transform:scale(1);
 }
 
-/* Desaparece splash */
 #splash.fade{
   opacity:0;
   pointer-events:none;
@@ -50,7 +44,7 @@ html,body{
   min-height:100vh;
   background:white;
   opacity:0;
-  transition:opacity 1.5s ease;
+  transition:opacity 0.8s ease;
 }
 
 #page.show{
@@ -59,4 +53,17 @@ html,body{
 
 .hidden{
   opacity:0;
+}
+
+/* TOP TITLE */
+
+.topbar{
+  width:100%;
+  padding:14px 18px;
+}
+
+.top-title{
+  font-size:16px;
+  font-weight:600;
+  color:#000;
 }
