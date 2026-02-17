@@ -1,94 +1,38 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Firemap</title>
-  <meta name="description" content="Firemap - Visualización de incendios en tiempo real." />
+<meta charset="UTF-8">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+body{
+  margin:0;
+  font-family:'Inter', sans-serif;
+  background:#ffffff;
+  color:#111;
+  display:flex;
+  height:100vh;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+}
 
-  <!-- Fuente -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@200;300;400;500&display=swap" rel="stylesheet">
+h1{
+  font-size:72px;
+  font-weight:600;
+  letter-spacing:-2px;
+}
 
-  <link rel="stylesheet" href="styles.css" />
+p{
+  font-size:20px;
+  font-weight:300;
+  color:#666;
+}
+</style>
 </head>
-
 <body>
-
-  <header class="nav">
-    <div class="brand">firemap</div>
-    <nav class="links">
-      <a href="#mapa">mapa</a>
-      <a href="#sobre">sobre</a>
-      <a href="#estado">estado</a>
-      <a href="#contacto">contacto</a>
-    </nav>
-  </header>
-
-  <main class="hero">
-    <h1>incendios visualizados en tiempo real</h1>
-    <p class="lead">
-      Firemap es una herramienta para explorar información de incendios mediante un mapa interactivo,
-      con datos organizados por fecha y ubicación.
-    </p>
-
-    <div class="buttons">
-      <a href="#mapa" class="btn">ver mapa</a>
-      <a href="#sobre" class="btn secondary">cómo funciona</a>
-    </div>
-  </main>
-
-  <section id="mapa" class="section">
-    <h2>mapa</h2>
-    <div class="card">
-      <p class="muted">Aquí irá el mapa interactivo.</p>
-    </div>
-  </section>
-
-  <section id="sobre" class="section">
-    <h2>sobre firemap</h2>
-
-    <div class="grid">
-      <div class="card">
-        <h3>datos</h3>
-        <p>Integración de fuentes públicas para monitorizar incendios activos y pasados.</p>
-      </div>
-
-      <div class="card">
-        <h3>visualización</h3>
-        <p>Interfaz minimalista centrada en el mapa como elemento principal.</p>
-      </div>
-
-      <div class="card">
-        <h3>estructura</h3>
-        <p>Arquitectura simple y mantenible, diseñada para crecer.</p>
-      </div>
-    </div>
-  </section>
-
-  <section id="estado" class="section">
-    <h2>estado del proyecto</h2>
-    <div class="card">
-      <p>Versión actual: v0.1</p>
-      <p class="muted">En desarrollo continuo.</p>
-    </div>
-  </section>
-
-  <section id="contacto" class="section">
-    <h2>contacto</h2>
-    <div class="card">
-      <p>email: contacto@firemap.es</p>
-    </div>
-  </section>
-
-  <footer class="footer">
-    <p>© <span id="year"></span> firemap</p>
-  </footer>
-
-  <script>
-    document.getElementById("year").textContent = new Date().getFullYear();
-  </script>
-
+<div>
+<h1>FIREMAP</h1>
+<p>Mapa inteligente de incidencias en tiempo real</p>
+</div>
 </body>
 </html>
