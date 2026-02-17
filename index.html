@@ -292,8 +292,9 @@
         <p class="lang-title" id="langLabel">Language</p>
 
         <div class="lang-row">
-          <button class="lang-pill" id="btnES">ES</button>
-          <button class="lang-pill" id="btnEN">EN</button>
+          <button type="button" class="lang-pill" id="btnES">ES</button>
+          <button type="button" class="lang-pill" id="btnEN">EN</button>
+
         </div>
       </div>
     </div>
@@ -348,8 +349,9 @@
     </section>
   </main>
 
-  <script>
-    // ========= Popover logic (como la foto) =========
+ <script>
+  document.addEventListener("DOMContentLoaded", () => {
+    // ========= Popover logic =========
     const burgerBtn = document.getElementById("burgerBtn");
     const langPopover = document.getElementById("langPopover");
     const clickCatcher = document.getElementById("clickCatcher");
@@ -437,6 +439,7 @@
 
     function applyLang(lang){
       const t = texts[lang];
+      if(!t) return;
 
       ids.langLabel.textContent = t.langLabel;
       ids.aboutTitle.textContent = t.aboutTitle;
@@ -463,8 +466,11 @@
       closePopover();
     });
 
+    // Inicial
     const saved = localStorage.getItem("firemap_lang");
     applyLang(saved || "en");
-  </script>
+  });
+</script>
+
 </body>
 </html>
