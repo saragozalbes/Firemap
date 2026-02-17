@@ -1,38 +1,106 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
-<style>
-body{
-  margin:0;
-  font-family:'Inter', sans-serif;
-  background:#ffffff;
-  color:#111;
-  display:flex;
-  height:100vh;
-  align-items:center;
-  justify-content:center;
-  text-align:center;
-}
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Firemap</title>
+  <meta name="description" content="Firemap - Visualización de incendios en tiempo real." />
 
-h1{
-  font-size:72px;
-  font-weight:600;
-  letter-spacing:-2px;
-}
+  <!-- Fuente -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@200;300;400;500&display=swap" rel="stylesheet">
 
-p{
-  font-size:20px;
-  font-weight:300;
-  color:#666;
-}
-</style>
+  <link rel="stylesheet" href="styles.css" />
 </head>
+
 <body>
-<div>
-<h1>FIREMAP</h1>
-<p>Mapa inteligente de incidencias en tiempo real</p>
-</div>
+  <!-- SPLASH -->
+  <div id="splash" class="splash" aria-hidden="true">
+    <div class="splash-inner">
+      <!-- Cambia la ruta si tu icon está en otro sitio -->
+      <img class="splash-logo" src="assets/icon.png" alt="Firemap" />
+      <div class="splash-name">firemap</div>
+      <div class="splash-sub">cargando…</div>
+    </div>
+  </div>
+
+  <!-- CONTENIDO -->
+  <header class="navbar">
+    <div class="logo">
+      <img src="assets/icon.png" alt="Firemap" class="mini-logo" />
+      <span>firemap</span>
+    </div>
+
+    <nav class="navlinks">
+      <a href="#mapa">mapa</a>
+      <a href="#info">info</a>
+      <a href="#contacto">contacto</a>
+    </nav>
+  </header>
+
+  <main class="hero">
+    <h1>incendios visualizados en tiempo real</h1>
+    <p class="lead">una forma clara y rápida de entender qué está ocurriendo y dónde.</p>
+
+    <div class="buttons">
+      <a class="btn primary" href="#mapa">abrir mapa</a>
+      <a class="btn" href="#info">cómo funciona</a>
+    </div>
+  </main>
+
+  <section id="mapa" class="section">
+    <h2>mapa</h2>
+    <div class="card">
+      <div class="placeholder">📍 aquí irá el mapa interactivo</div>
+    </div>
+  </section>
+
+  <section id="info" class="section">
+    <h2>info</h2>
+    <div class="grid">
+      <div class="card">
+        <h3>datos</h3>
+        <p>integramos datos y los preparamos para que se vean claros en el mapa.</p>
+      </div>
+      <div class="card">
+        <h3>capas</h3>
+        <p>filtros por fecha, zona y tipo de evento (según lo que definas).</p>
+      </div>
+      <div class="card">
+        <h3>actualizaciones</h3>
+        <p>el proyecto irá creciendo con más fuentes y mejor visualización.</p>
+      </div>
+    </div>
+  </section>
+
+  <footer id="contacto" class="footer">
+    <div>© <span id="year"></span> firemap · <a href="mailto:contacto@firemap.es">contacto@firemap.es</a></div>
+  </footer>
+
+  <script>
+    // Año
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    // Splash: cuando la página esté lista, animamos y ocultamos
+    window.addEventListener("load", () => {
+      const splash = document.getElementById("splash");
+      if (!splash) return;
+
+      // mínimo tiempo visible para que se note (ajusta si quieres)
+      const MIN_MS = 650;
+
+      const t0 = performance.now();
+      const hide = () => {
+        splash.classList.add("splash-hide");
+        // cuando termine la transición, lo quitamos del DOM
+        splash.addEventListener("transitionend", () => splash.remove(), { once: true });
+      };
+
+      const elapsed = performance.now() - t0;
+      const wait = Math.max(0, MIN_MS - elapsed);
+      setTimeout(hide, wait);
+    });
+  </script>
 </body>
 </html>
