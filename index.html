@@ -1,55 +1,143 @@
 <!doctype html>
 <html lang="es">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Firemap</title>
-
-<link rel="stylesheet" href="styles.css" />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Firemap</title>
+  <link rel="stylesheet" href="styles.css" />
 </head>
 
 <body>
 
-<!-- SPLASH -->
-<div id="splash">
-  <img id="logo" src="./assets/icon.svg" alt="Firemap">
-</div>
+  <!-- SPLASH -->
+  <div id="splash" aria-hidden="true">
+    <img id="logo" src="./assets/icon.svg" alt="Firemap" />
+  </div>
 
-<!-- PÁGINA -->
-<main id="page" class="hidden">
-  <header class="topbar">
-    <h1 class="title">Firemap</h1>
-  </header>
-</main>
+  <!-- APP -->
+  <main id="page" class="hidden">
+    <header class="topbar">
+      <h1 class="title" data-i18n="title">Firemap</h1>
 
-<script>
-window.addEventListener("load", () => {
+      <div class="menu">
+        <button id="menuBtn" class="menu-btn" aria-label="Menú" aria-haspopup="true" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
 
-  const splash = document.getElementById("splash");
-  const logo = document.getElementById("logo");
-  const page = document.getElementById("page");
+        <div id="menuPanel" class="menu-panel" role="menu" aria-hidden="true">
+          <div class="menu-label" data-i18n="language">Idioma</div>
+          <div class="lang-buttons">
+            <button class="lang-btn" data-lang="es" type="button">ES</button>
+            <button class="lang-btn" data-lang="en" type="button">EN</button>
+          </div>
+        </div>
+      </div>
+    </header>
 
-  // Logo aparece lento
-  setTimeout(() => {
-    logo.classList.add("logo-in");
-  }, 200);
+    <div class="divider"></div>
 
-  const HOLD_MS = 1800;
-  const FADE_MS = 1000;
+    <!-- CONTENIDO (aquí pondremos luego la info de la app) -->
+    <section class="content">
+      <div class="placeholder" data-i18n="placeholder">
+        Aquí irá toda la información de la aplicación.
+      </div>
+    </section>
+  </main>
 
-  setTimeout(() => {
-    splash.classList.add("fade");
+  <script>
+    // ---------- Splash ----------
+    window.addEventListener("load", () => {
+      const splash = document.getElementById("splash");
+      const logo = document.getElementById("logo");
+      const page = document.getElementById("page");
 
-    setTimeout(() => {
-      splash.style.display = "none";
-      page.classList.remove("hidden");
-      page.classList.add("show");
-    }, FADE_MS);
+      // Logo aparece más lento y nunca "de golpe"
+      setTimeout(() => logo.classList.add("logo-in"), 200);
 
-  }, HOLD_MS);
+      const HOLD_MS = 1600; // cuánto se queda antes de irse
+      const FADE_MS = 1000; // duración fade-out (coincide con CSS)
 
-});
-</script>
+      setTimeout(() => {
+        splash.classList.add("fade");
+        setTimeout(() => {
+          splash.style.display = "none";
+          page.classList.remove("hidden");
+          page.classList.add("show");
+        }, FADE_MS);
+      }, HOLD_MS);
+    });
+
+    // ---------- Menú (3 rallitas) ----------
+    const menuBtn = document.getElementById("menuBtn");
+    const menuPanel = document.getElementById("menuPanel");
+
+    function closeMenu() {
+      menuPanel.classList.remove("open");
+      menuPanel.setAttribute("aria-hidden", "true");
+      menuBtn.setAttribute("aria-expanded", "false");
+    }
+
+    function toggleMenu() {
+      const isOpen = menuPanel.classList.toggle("open");
+      menuPanel.setAttribute("aria-hidden", String(!isOpen));
+      menuBtn.setAttribute("aria-expanded", String(isOpen));
+    }
+
+    menuBtn.addEventListener("click", (e) => {
+      e.stopPropagation();
+      toggleMenu();
+    });
+
+    document.addEventListener("click", () => closeMenu());
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") closeMenu();
+    });
+
+    // ---------- Idiomas (ES/EN) ----------
+    const dict = {
+      es: {
+        title: "Firemap",
+        language: "Idioma",
+        placeholder: "Aquí irá toda la información de la aplicación."
+      },
+      en: {
+        title: "Firemap",
+        language: "Language",
+        placeholder: "All the app information will go here."
+      }
+    };
+
+    function applyLang(lang) {
+      const safe = dict[lang] ? lang : "es";
+      localStorage.setItem("firemap_lang", safe);
+
+      // Cambia atributo lang del HTML
+      document.documentElement.lang = safe;
+
+      // Reemplaza textos
+      document.querySelectorAll("[data-i18n]").forEach(el => {
+        const key = el.getAttribute("data-i18n");
+        if (dict[safe][key] != null) el.textContent = dict[safe][key];
+      });
+
+      // Estado visual de botones
+      document.querySelectorAll(".lang-btn").forEach(b => {
+        b.classList.toggle("active", b.dataset.lang === safe);
+      });
+    }
+
+    // Carga idioma guardado (o ES por defecto)
+    applyLang(localStorage.getItem("firemap_lang") || "es");
+
+    // Click en botones idioma
+    document.querySelectorAll(".lang-btn").forEach(btn => {
+      btn.addEventListener("click", (e) => {
+        e.stopPropagation();
+        applyLang(btn.dataset.lang);
+        closeMenu();
+      });
+    });
+  </script>
 
 </body>
 </html>
