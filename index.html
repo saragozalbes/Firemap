@@ -23,6 +23,7 @@ body{
   color:black;
 }
 
+/* ================= SPLASH ================= */
 #splash{
   position:fixed;
   inset:0;
@@ -53,14 +54,13 @@ body{
   pointer-events:none;
 }
 
-#app.hidden{
-  opacity:0;
-}
+#app.hidden{ opacity:0; }
 #app.show{
   opacity:1;
   transition: opacity .6s ease;
 }
 
+/* ================= HEADER ================= */
 .topbar{
   position:sticky;
   top:0;
@@ -109,6 +109,7 @@ body{
 
 .divider{height:1px;background:var(--line);}
 
+/* ================= LANGUAGE POPUP ================= */
 .lang-pop{
   position:absolute;
   right:16px;
@@ -147,6 +148,7 @@ body{
   border:1px solid black;
 }
 
+/* ================= CONTENT ================= */
 main{max-width:var(--max);margin:auto;padding:36px 18px;}
 
 .section{
@@ -167,10 +169,9 @@ main{max-width:var(--max);margin:auto;padding:36px 18px;}
   text-decoration:none;
   font-weight:500;
 }
-.contact-email:hover{
-  text-decoration:underline;
-}
+.contact-email:hover{ text-decoration:underline; }
 
+/* ================= DOWNLOAD BUTTONS ================= */
 .btn-row{
   display:flex;
   gap:12px;
@@ -190,7 +191,6 @@ main{max-width:var(--max);margin:auto;padding:36px 18px;}
   font-weight:650;
   transition:transform .12s ease, box-shadow .2s ease, border-color .2s ease;
 }
-
 .btn:hover{
   border-color: rgba(0,0,0,0.28);
   box-shadow: 0 12px 30px rgba(0,0,0,0.10);
@@ -207,6 +207,7 @@ main{max-width:var(--max);margin:auto;padding:36px 18px;}
   font-weight:800;
 }
 
+/* ================= STEPS ================= */
 .steps{
   margin-top:12px;
   display:grid;
@@ -221,6 +222,12 @@ main{max-width:var(--max);margin:auto;padding:36px 18px;}
   border:1px solid rgba(0,0,0,0.08);
   border-radius:14px;
   background:#fff;
+  transition: transform .12s ease, box-shadow .2s ease, border-color .2s ease;
+}
+.step:active{ transform: scale(0.985); }
+.step:hover{
+  border-color: rgba(0,0,0,0.12);
+  box-shadow: 0 10px 22px rgba(0,0,0,0.06);
 }
 
 .step-num{
@@ -232,6 +239,7 @@ main{max-width:var(--max);margin:auto;padding:36px 18px;}
   align-items:center;
   justify-content:center;
   font-weight:800;
+  flex: 0 0 auto;
 }
 
 .step-text{
@@ -245,6 +253,129 @@ main{max-width:var(--max);margin:auto;padding:36px 18px;}
   border-radius:14px;
   border:1px solid rgba(0,0,0,0.08);
   background: #fff;
+}
+
+/* ================= COUNTDOWN ================= */
+.countdown-wrap{
+  margin-top: 12px;
+  display:flex;
+  flex-direction:column;
+  gap: 12px;
+}
+
+.countdown-title{
+  font-weight:750;
+  color: #111;
+}
+
+.countdown-sub{
+  margin-top: 6px;
+  font-size: 14px;
+  color: var(--muted);
+  line-height: 1.5;
+}
+
+.countdown-grid{
+  display:grid;
+  grid-template-columns: repeat(4, minmax(0,1fr));
+  gap: 10px;
+}
+
+.timebox{
+  border:1px solid rgba(0,0,0,0.10);
+  border-radius:14px;
+  padding: 12px 10px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  background:#fff;
+}
+
+.timebox .num{
+  font-size: 22px;
+  font-weight: 850;
+  letter-spacing: 0.5px;
+  line-height: 1;
+}
+
+.timebox .lbl{
+  margin-top: 7px;
+  font-size: 12px;
+  letter-spacing: .35px;
+  color: #666;
+  font-weight: 700;
+}
+
+.pulse{ animation: pulse 1s infinite ease-in-out; }
+@keyframes pulse{
+  0%,100%{ transform: scale(1); }
+  50%{ transform: scale(1.04); }
+}
+
+.countdown-footer{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap: 10px;
+  padding-top: 6px;
+  border-top: 1px dashed rgba(0,0,0,0.12);
+}
+
+.small-note{
+  font-size: 13px;
+  color: #666;
+  line-height: 1.4;
+}
+
+.mini-btn{
+  border:1px solid rgba(0,0,0,.15);
+  background:#fff;
+  padding:10px 12px;
+  border-radius:12px;
+  font-weight:750;
+  cursor:pointer;
+  transition: transform .12s ease, box-shadow .2s ease, border-color .2s ease;
+  white-space: nowrap;
+}
+.mini-btn:hover{
+  border-color: rgba(0,0,0,0.28);
+  box-shadow: 0 10px 22px rgba(0,0,0,0.08);
+  transform: translateY(-1px);
+}
+.mini-btn:active{
+  transform: translateY(0) scale(0.98);
+}
+
+@media (max-width: 520px){
+  .countdown-grid{ grid-template-columns: repeat(2, minmax(0,1fr)); }
+}
+
+/* ================= CONFETTI (⏰🔥) ================= */
+.confetti-layer{
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 99999;
+}
+
+.confetti-piece{
+  position: absolute;
+  font-size: 18px;
+  will-change: transform, opacity;
+  opacity: 0;
+  animation: confetti-pop 900ms ease-out forwards;
+  filter: drop-shadow(0 6px 10px rgba(0,0,0,0.10));
+}
+
+@keyframes confetti-pop{
+  0%{ transform: translate(0,0) scale(0.7) rotate(0deg); opacity: 0; }
+  12%{ opacity: 1; transform: translate(0, -6px) scale(1.0) rotate(10deg); }
+  100%{ opacity: 0; transform: translate(var(--dx), var(--dy)) scale(1.1) rotate(var(--rot)); }
+}
+
+@media (prefers-reduced-motion: reduce){
+  .confetti-piece{ animation: none; opacity: 0; }
 }
 </style>
 </head>
@@ -289,25 +420,10 @@ main{max-width:var(--max);margin:auto;padding:36px 18px;}
       <h2 class="section-title" id="howTitle">How it works</h2>
 
       <div class="steps">
-        <div class="step">
-          <div class="step-num">1</div>
-          <div class="step-text" id="how1">Receive the daily Fallas monument notification.</div>
-        </div>
-
-        <div class="step">
-          <div class="step-num">2</div>
-          <div class="step-text" id="how2">Walk to its location and discover its story.</div>
-        </div>
-
-        <div class="step">
-          <div class="step-num">3</div>
-          <div class="step-text" id="how3">Upload a photo to save your memory of the day.</div>
-        </div>
-
-        <div class="step">
-          <div class="step-num">4</div>
-          <div class="step-text" id="how4">Build your own collection throughout the celebration.</div>
-        </div>
+        <div class="step"><div class="step-num">1</div><div class="step-text" id="how1">Receive the daily Fallas monument notification.</div></div>
+        <div class="step"><div class="step-num">2</div><div class="step-text" id="how2">Walk to its location and discover its story.</div></div>
+        <div class="step"><div class="step-num">3</div><div class="step-text" id="how3">Upload a photo to save your memory of the day.</div></div>
+        <div class="step"><div class="step-num">4</div><div class="step-text" id="how4">Build your own collection throughout the celebration.</div></div>
       </div>
     </section>
 
@@ -325,7 +441,6 @@ main{max-width:var(--max);margin:auto;padding:36px 18px;}
       </div>
     </section>
 
-    <!-- ✅ NUEVA SECCIÓN: NINOTS ESPECIALES (texto mejorado + más profesional) -->
     <section class="section">
       <h2 class="section-title" id="ninotsTitle">Special Ninots — New section</h2>
 
@@ -336,31 +451,41 @@ main{max-width:var(--max);margin:auto;padding:36px 18px;}
       </p>
 
       <div class="steps">
-        <div class="step">
-          <div class="step-num">📍</div>
-          <div class="step-text" id="ninots1">Visit the highlighted Falla of the day and locate the Special Ninot.</div>
-        </div>
-
-        <div class="step">
-          <div class="step-num">📸</div>
-          <div class="step-text" id="ninots2">Capture it with your camera and upload your photo that same day.</div>
-        </div>
-
-        <div class="step">
-          <div class="step-num">🗂</div>
-          <div class="step-text" id="ninots3">Unlock it in your collection and keep building your Firemap Album.</div>
-        </div>
-
-        <div class="step">
-          <div class="step-num">🔥</div>
-          <div class="step-text" id="ninots4">Complete the challenge before the Cremà — once they burn, they’re gone.</div>
-        </div>
+        <div class="step"><div class="step-num">📍</div><div class="step-text" id="ninots1">Visit the highlighted Falla of the day and locate the Special Ninot.</div></div>
+        <div class="step"><div class="step-num">📸</div><div class="step-text" id="ninots2">Capture it with your camera and upload your photo that same day.</div></div>
+        <div class="step"><div class="step-num">🗂</div><div class="step-text" id="ninots3">Unlock it in your collection and keep building your Firemap Album.</div></div>
+        <div class="step"><div class="step-num">🔥</div><div class="step-text" id="ninots4">Complete the challenge before the Cremà — once they burn, they’re gone.</div></div>
       </div>
 
       <div class="highlight">
         <p class="text" id="ninotsNote">
           Challenge: catch them before the day ends. Your album only updates with same-day uploads.
         </p>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2 class="section-title" id="countTitle">Cremà Countdown</h2>
+
+      <div class="countdown-wrap">
+        <div>
+          <div class="countdown-title" id="countHeading">Time left for today’s Cremà</div>
+          <p class="countdown-sub" id="countDesc">
+            Each selected Falla can include its own countdown. This is an example timer you can later connect to the “Falla of the day”.
+          </p>
+        </div>
+
+        <div class="countdown-grid" aria-live="polite">
+          <div class="timebox" id="boxDays"><div class="num" id="cdDays">00</div><div class="lbl" id="lblDays">DAYS</div></div>
+          <div class="timebox" id="boxHours"><div class="num" id="cdHours">00</div><div class="lbl" id="lblHours">HOURS</div></div>
+          <div class="timebox" id="boxMins"><div class="num" id="cdMins">00</div><div class="lbl" id="lblMins">MIN</div></div>
+          <div class="timebox" id="boxSecs"><div class="num" id="cdSecs">00</div><div class="lbl" id="lblSecs">SEC</div></div>
+        </div>
+
+        <div class="countdown-footer">
+          <div class="small-note" id="countNote"></div>
+          <button class="mini-btn" type="button" id="demoBtn">New demo time</button>
+        </div>
       </div>
     </section>
 
@@ -380,10 +505,12 @@ main{max-width:var(--max);margin:auto;padding:36px 18px;}
         <a class="btn" href="#" id="webBtn"><span class="badge">⌁</span><span id="webLabel">Web App</span></a>
       </div>
     </section>
+
   </main>
 </div>
 
 <script>
+/* ============ SPLASH ============ */
 window.addEventListener("load", () => {
   const splash = document.getElementById("splash");
   const logo = document.getElementById("splashLogo");
@@ -404,6 +531,7 @@ window.addEventListener("load", () => {
   }, HOLD);
 });
 
+/* ============ I18N ============ */
 const T = {
   en:{
     lang:"Language",
@@ -420,7 +548,7 @@ const T = {
 
     ninotsTitle:"Special Ninots — New section",
     ninotsText:
-      "During Fallas, each day Firemap highlights a selected Falla… and with it, a Fire Ninot. " +
+      "During Fallas, each day Firemap highlights a selected Falla… and with it, a Special Ninot. " +
       "Find it, take a photo, and upload it the very same day to unlock it in your Firemap Album. " +
       "A unique way to explore the city and collect unforgettable moments.",
     ninots1:"Visit the highlighted Falla of the day and locate the Special Ninot.",
@@ -428,6 +556,16 @@ const T = {
     ninots3:"Unlock it in your collection and keep building your Firemap Album.",
     ninots4:"Complete the challenge before the Cremà — once they burn, they’re gone.",
     ninotsNote:"Challenge: catch them before the day ends. Your album only updates with same-day uploads.",
+
+    countTitle:"Cremà Countdown",
+    countHeading:"Time left for today’s Cremà",
+    countDesc:"Each selected Falla can include its own countdown. This is an example timer you can later connect to the “Falla of the day”.",
+    lblDays:"DAYS", lblHours:"HOURS", lblMins:"MIN", lblSecs:"SEC",
+
+    /* ✅ AQUÍ: equivalente a “Recomendación” en inglés */
+    countNote:"Recommendation: keep an eye on Firemap’s timer and the suggested location so you arrive right on time and don’t miss each Falla’s Cremà.",
+
+    demoBtn:"New demo time",
 
     contact:"Contact",
     contactT:"Open to exciting projects and collaborations.",
@@ -459,6 +597,16 @@ const T = {
     ninots4:"Completa el reto antes de la Cremà — cuando se quemen, desaparecerán para siempre.",
     ninotsNote:"Reto: atrápalos antes de que acabe el día. El álbum solo se actualiza con subidas del mismo día.",
 
+    countTitle:"Cuenta atrás para la Cremà",
+    countHeading:"Tiempo restante para la Cremà de cada Falla capturada",
+    countDesc:"Cada Falla seleccionada tiene su propio contador. Este es un ejemplo que luego puedes encontrar con la Falla selecionada del día.",
+    lblDays:"DÍAS", lblHours:"HORAS", lblMins:"MIN", lblSecs:"SEG",
+
+    /* ✅ Tu cambio en español */
+    countNote:"Recomendación: mantente atento al contador de Firemap y a la ubicación indicada para llegar a la hora exacta y no perderte la Cremà de cada Falla.",
+
+    demoBtn:"Nuevo ejemplo",
+
     contact:"Contacto",
     contactT:"Abierto a proyectos y colaboraciones.",
     download:"Descargar",
@@ -470,40 +618,53 @@ const T = {
 function apply(l){
   const t = T[l] || T.en;
 
-  document.getElementById("langLabel").textContent = t.lang;
-  document.getElementById("aboutTitle").textContent = t.about;
-  document.getElementById("aboutText").textContent = t.aboutT;
+  const safe = (id, value) => {
+    const el = document.getElementById(id);
+    if(el) el.textContent = value;
+  };
 
-  document.getElementById("howTitle").textContent = t.howTitle;
-  document.getElementById("how1").textContent = t.how1;
-  document.getElementById("how2").textContent = t.how2;
-  document.getElementById("how3").textContent = t.how3;
-  document.getElementById("how4").textContent = t.how4;
+  safe("langLabel", t.lang);
+  safe("aboutTitle", t.about);
+  safe("aboutText", t.aboutT);
 
-  document.getElementById("expTitle").textContent = t.expTitle;
-  document.getElementById("expText").textContent = t.expText;
-  document.getElementById("expNote").textContent = t.expNote;
+  safe("howTitle", t.howTitle);
+  safe("how1", t.how1);
+  safe("how2", t.how2);
+  safe("how3", t.how3);
+  safe("how4", t.how4);
 
-  // ninots
-  document.getElementById("ninotsTitle").textContent = t.ninotsTitle;
-  document.getElementById("ninotsText").textContent = t.ninotsText;
-  document.getElementById("ninots1").textContent = t.ninots1;
-  document.getElementById("ninots2").textContent = t.ninots2;
-  document.getElementById("ninots3").textContent = t.ninots3;
-  document.getElementById("ninots4").textContent = t.ninots4;
-  document.getElementById("ninotsNote").textContent = t.ninotsNote;
+  safe("expTitle", t.expTitle);
+  safe("expText", t.expText);
+  safe("expNote", t.expNote);
 
-  document.getElementById("contactTitle").textContent = t.contact;
-  document.getElementById("contactText").textContent = t.contactT;
+  safe("ninotsTitle", t.ninotsTitle);
+  safe("ninotsText", t.ninotsText);
+  safe("ninots1", t.ninots1);
+  safe("ninots2", t.ninots2);
+  safe("ninots3", t.ninots3);
+  safe("ninots4", t.ninots4);
+  safe("ninotsNote", t.ninotsNote);
 
-  document.getElementById("downloadTitle").textContent = t.download;
-  document.getElementById("downloadText").textContent = t.downloadT;
-  document.getElementById("appleLabel").textContent = t.apple;
-  document.getElementById("googleLabel").textContent = t.google;
-  document.getElementById("webLabel").textContent = t.web;
+  safe("countTitle", t.countTitle);
+  safe("countHeading", t.countHeading);
+  safe("countDesc", t.countDesc);
+  safe("lblDays", t.lblDays);
+  safe("lblHours", t.lblHours);
+  safe("lblMins", t.lblMins);
+  safe("lblSecs", t.lblSecs);
+  safe("countNote", t.countNote);
+  safe("demoBtn", t.demoBtn);
+
+  safe("contactTitle", t.contact);
+  safe("contactText", t.contactT);
+
+  safe("downloadTitle", t.download);
+  safe("downloadText", t.downloadT);
+  safe("appleLabel", t.apple);
+  safe("googleLabel", t.google);
+  safe("webLabel", t.web);
 
   localStorage.setItem("lang", l);
-
   document.getElementById("esBtn").classList.toggle("active", l === "es");
   document.getElementById("enBtn").classList.toggle("active", l === "en");
 }
@@ -526,7 +687,117 @@ document.addEventListener("click", (e) => {
   }
 });
 
+/* ============ CONFETTI ⏰🔥 ============ */
+function burstClockFireConfetti(fromEl){
+  let layer = document.querySelector(".confetti-layer");
+  if(!layer){
+    layer = document.createElement("div");
+    layer.className = "confetti-layer";
+    document.body.appendChild(layer);
+  }
+
+  const rect = fromEl.getBoundingClientRect();
+  const originX = rect.left + rect.width / 2;
+  const originY = rect.top + rect.height / 2;
+
+  const emojis = ["🧨","🔥","⏰","💥","🧨","🔥","⏰","🧨"];
+  const count = 26;
+
+  for(let i=0;i<count;i++){
+    const piece = document.createElement("span");
+    piece.className = "confetti-piece";
+    piece.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+
+    piece.style.left = originX + "px";
+    piece.style.top  = originY + "px";
+
+    const angle = Math.random() * Math.PI * 2;
+    const radius = 80 + Math.random() * 130;
+    const dx = Math.cos(angle) * radius;
+    const dy = (Math.sin(angle) * radius) - (120 + Math.random() * 120);
+
+    const rot = (Math.random() * 360 - 180) + "deg";
+    const size = 16 + Math.random() * 12;
+
+    piece.style.setProperty("--dx", dx.toFixed(1) + "px");
+    piece.style.setProperty("--dy", dy.toFixed(1) + "px");
+    piece.style.setProperty("--rot", rot);
+    piece.style.fontSize = size + "px";
+    piece.style.animationDelay = (Math.random() * 80) + "ms";
+
+    layer.appendChild(piece);
+    piece.addEventListener("animationend", () => piece.remove());
+  }
+
+  setTimeout(() => {
+    if(layer && layer.childElementCount === 0) layer.remove();
+  }, 1400);
+}
+
+/* ============ COUNTDOWN ============ */
+let targetTime = null;
+let timer = null;
+
+const elDays  = document.getElementById("cdDays");
+const elHours = document.getElementById("cdHours");
+const elMins  = document.getElementById("cdMins");
+const elSecs  = document.getElementById("cdSecs");
+
+function pad(n){ return String(n).padStart(2,"0"); }
+
+function setTarget(dateObj){
+  targetTime = dateObj.getTime();
+  startCountdown();
+}
+
+function randomDemoTarget(){
+  const mins = 1 + Math.floor(Math.random() * 5);
+  setTarget(new Date(Date.now() + mins * 60 * 1000));
+}
+
+function startCountdown(){
+  if(timer) clearInterval(timer);
+  tick();
+  timer = setInterval(tick, 1000);
+}
+
+function tick(){
+  if(!targetTime) return;
+
+  const now = Date.now();
+  let diff = targetTime - now;
+
+  const boxSecs = document.getElementById("boxSecs");
+  if(diff <= 0){
+    diff = 0;
+    boxSecs.classList.add("pulse");
+    setTimeout(()=> boxSecs.classList.remove("pulse"), 1400);
+  }
+
+  const totalSeconds = Math.floor(diff/1000);
+  const days  = Math.floor(totalSeconds / (3600*24));
+  const hours = Math.floor((totalSeconds % (3600*24)) / 3600);
+  const mins  = Math.floor((totalSeconds % 3600) / 60);
+  const secs  = totalSeconds % 60;
+
+  elDays.textContent  = pad(days);
+  elHours.textContent = pad(hours);
+  elMins.textContent  = pad(mins);
+  elSecs.textContent  = pad(secs);
+
+  boxSecs.classList.remove("pulse");
+  void boxSecs.offsetWidth;
+  boxSecs.classList.add("pulse");
+}
+
+document.getElementById("demoBtn").addEventListener("click", (e) => {
+  randomDemoTarget();
+  burstClockFireConfetti(e.currentTarget);
+});
+
+/* init */
 apply(localStorage.getItem("lang") || "en");
+randomDemoTarget();
 </script>
 
 </body>
